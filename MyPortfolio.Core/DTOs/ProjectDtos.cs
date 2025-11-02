@@ -1,4 +1,6 @@
-﻿namespace MyPortfolio.Core.DTOs
+﻿using Microsoft.AspNetCore.Http;
+
+namespace MyPortfolio.Core.DTOs
 {
     public class ProjectDto
     {
@@ -7,7 +9,7 @@
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string ProjectUrl { get; set; }
-        public string SourceCodeUrl { get; set; }
+        public string? SourceCodeUrl { get; set; }
         public List<string> Technologies { get; set; } = new();
     }
 
@@ -15,9 +17,9 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public IFormFile ImageFile { get; set; }
         public string ProjectUrl { get; set; }
-        public string SourceCodeUrl { get; set; }
+        public string? SourceCodeUrl { get; set; }
         public List<string> Technologies { get; set; } = new();
     }
 
@@ -26,8 +28,8 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public string ProjectUrl { get; set; }
-        public string SourceCodeUrl { get; set; }
+        public IFormFile? ImageFile { get; set; }
+        public string? SourceCodeUrl { get; set; }
         public List<string> Technologies { get; set; } = new();
     }
 }

@@ -13,7 +13,7 @@ namespace MyPortfolio.Core.Entities
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string ProjectUrl { get; set; }
-        public string SourceCodeUrl { get; set; }
+        public string? SourceCodeUrl { get; set; }
         public List<string> Technologies { get; set; } = new List<string>();
     }
 }

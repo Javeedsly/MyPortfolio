@@ -10,9 +10,13 @@ namespace MyPortfolio.Business.Mapping
         {
             CreateMap<Project, ProjectDto>().ReverseMap();
 
-            CreateMap<Project, CreateProjectDto>().ReverseMap();
+            CreateMap<CreateProjectDto, Project>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+            CreateMap<Project, CreateProjectDto>();
 
-            CreateMap<Project, UpdateProjectDto>().ReverseMap();
+            CreateMap<UpdateProjectDto, Project>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+            CreateMap<Project, UpdateProjectDto>();
         }
     }
 }
