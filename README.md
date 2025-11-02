@@ -1,3 +1,5 @@
+Buyurun, `README.md` faylının məzmunu:
+
 # MyPortfolio - ASP.NET Core Web API
 
 This is the backend component for the "My Portfolio" application, built as an ASP.NET Core 8 Web API. It is designed to manage and serve portfolio project data, handle user authentication, and manage file uploads.
@@ -17,7 +19,7 @@ The project is built using a clean **N-Layer Architecture** and is intended to b
   * **API Documentation:** Integrated **Swagger/OpenAPI** for easy API testing and documentation.
   * **CORS:** Configured with a policy named `"AllowNextApp"` to allow requests from `http://localhost:3000`.
 
-## 💻 Technology Stack
+## 捗 Technology Stack
 
   * **.NET 8.0**
   * **ASP.NET Core 8.0**
@@ -30,7 +32,7 @@ The project is built using a clean **N-Layer Architecture** and is intended to b
 
 -----
 
-## 📂 Project Structure
+## 唐 Project Structure
 
 The solution follows an N-Layer architecture, separating responsibilities into the following projects:
 
@@ -43,7 +45,7 @@ The solution follows an N-Layer architecture, separating responsibilities into t
 
 -----
 
-## 🚀 Getting Started
+## 噫 Getting Started
 
 ### 1\. Prerequisites
 
@@ -120,7 +122,7 @@ dotnet ef database update --project MyPortfolio
 
 -----
 
-## 🔐 Authentication Flow
+## 柏 Authentication Flow
 
 1.  **Register:** Send a `POST` request to `/api/auth/register` with a `RegisterDto` (username, email, password).
 2.  **Login:** Send a `POST` request to `/api/auth/login` with a `LoginDto` (username, password).
