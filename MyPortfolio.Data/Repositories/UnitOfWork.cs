@@ -6,11 +6,13 @@ namespace MyPortfolio.Data.Repositories
     {
         private readonly AppDbContext _context;
         public IProjectRepository Projects { get; private set; }
+        public IBlogRepository Blogs { get; private set; }
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
             Projects = new ProjectRepository(_context);
+            Blogs = new BlogRepository(_context);
         }
 
         public async Task<int> CompleteAsync()

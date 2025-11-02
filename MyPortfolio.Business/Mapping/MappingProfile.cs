@@ -17,6 +17,15 @@ namespace MyPortfolio.Business.Mapping
             CreateMap<UpdateProjectDto, Project>()
                 .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
             CreateMap<Project, UpdateProjectDto>();
+
+            CreateMap<Blog, BlogDto>().ReverseMap();
+
+            CreateMap<CreateBlogDto, Blog>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore())
+                .ForMember(dest => dest.PublishedDate, opt => opt.Ignore()); 
+
+            CreateMap<UpdateBlogDto, Blog>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
         }
     }
 }
