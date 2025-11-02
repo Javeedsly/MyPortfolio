@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyPortfolio.Data\MyPortfolio.Data.csproj" />
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using MyPortfolio.Core.DTOs;
 using MyPortfolio.Core.Entities;
@@ -121,6 +122,7 @@ namespace MyPortfolio.Business.Services
                 await imageFile.CopyToAsync(fileStream);
             }
 
+            return $"/uploads/{uniqueFileName}";
         }
     }
 }

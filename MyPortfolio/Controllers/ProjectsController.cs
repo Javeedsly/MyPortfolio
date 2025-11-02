@@ -15,7 +15,7 @@ namespace MyPortfolio.Controllers
             _projectService = projectService;
         }
 
-        
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
         {
@@ -23,29 +23,29 @@ namespace MyPortfolio.Controllers
             return Ok(projects);
         }
 
-        
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjectDto>> GetProject(int id)
         {
             var project = await _projectService.GetProjectByIdAsync(id);
             if (project == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
             return Ok(project);
         }
 
-        
+
         [HttpPost]
-        public async Task<ActionResult<ProjectDto>> CreateProject(CreateProjectDto createDto)
+        public async Task<ActionResult<ProjectDto>> CreateProject([FromForm] CreateProjectDto createDto) 
         {
             var newProject = await _projectService.CreateProjectAsync(createDto);
             return CreatedAtAction(nameof(GetProject), new { id = newProject.Id }, newProject);
         }
 
-        
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProject(int id, UpdateProjectDto updateDto)
+        public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto updateDto) 
         {
             try
             {
@@ -53,13 +53,13 @@ namespace MyPortfolio.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-            return NoContent(); 
+            return NoContent();
         }
 
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
