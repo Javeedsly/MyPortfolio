@@ -39,7 +39,7 @@ namespace MyPortfolio.Controllers
 
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ProjectDto>> CreateProject([FromForm] CreateProjectDto createDto) 
         {
             var newProject = await _projectService.CreateProjectAsync(createDto);
@@ -48,7 +48,7 @@ namespace MyPortfolio.Controllers
 
 
         [HttpPut("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto updateDto) 
         {
             try
@@ -65,7 +65,7 @@ namespace MyPortfolio.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> DeleteProject(int id)
         {
             try

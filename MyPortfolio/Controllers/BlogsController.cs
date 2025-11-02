@@ -48,7 +48,7 @@ namespace MyPortfolio.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<BlogDto>> CreateBlog([FromForm] CreateBlogDto createDto)
         {
             var newBlog = await _blogService.CreateBlogAsync(createDto);
@@ -56,7 +56,7 @@ namespace MyPortfolio.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> UpdateBlog(int id, [FromForm] UpdateBlogDto updateDto)
         {
             try
@@ -71,7 +71,7 @@ namespace MyPortfolio.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> DeleteBlog(int id)
         {
             try
