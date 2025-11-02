@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Core.Entities;
 
 namespace MyPortfolio.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -11,13 +12,13 @@ namespace MyPortfolio.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); 
 
             modelBuilder.Entity<Project>()
                 .Property(p => p.Technologies)
                 .HasConversion(
-                    v => string.Join(',', v), 
-                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList() 
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
                 );
         }
     }
