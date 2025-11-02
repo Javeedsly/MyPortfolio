@@ -79,8 +79,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddCors(options =>
