@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyPortfolio.Authorization;
 using MyPortfolio.Business.Mapping;
 using MyPortfolio.Business.Services;
 using MyPortfolio.Core.Interfaces;
@@ -20,7 +21,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-
+builder.Services.AddTransient<ApiKeyAuthorizeFilter>();
 
 builder.Services.AddCors(options =>
 {
