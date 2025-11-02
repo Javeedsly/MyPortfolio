@@ -12,7 +12,7 @@ using MyPortfolio.Data;
 namespace MyPortfolio.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251102191124_initial")]
+    [Migration("20251102195338_initial")]
     partial class initial
     {
         /// <inheritdoc />
