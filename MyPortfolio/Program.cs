@@ -84,7 +84,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
-
+builder.Services.AddScoped<IEmailService, FileEmailService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextApp",
