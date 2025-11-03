@@ -88,17 +88,32 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextApp",
-        policy => policy.WithOrigins("http://localhost:3000") 
+        policy => policy.WithOrigins("http://localhost:3000")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
 
 // ==========================================================
 
-// ==========================================================
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
+        logger.LogInformation("Database migration completed successfully.");
 
+        await IdentityDataSeeder.SeedRolesAndSuperAdminAsync(services, logger);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred during database seeding.");
+    }
+}
 
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyPortfolio API v1"));
@@ -106,7 +121,7 @@ app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyPortfolio
 
 if (app.Environment.IsDevelopment())
 {
-    
+
 }
 
 
@@ -125,7 +140,7 @@ app.UseStaticFiles();
 
 app.UseCors("AllowNextApp");
 
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
