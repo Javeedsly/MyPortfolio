@@ -1,4 +1,0 @@
-To: cavidsly@gmail.com
-Subject: Confirm your email
-
-<h1>Email Confirmation</h1><p>Please confirm your email by clicking <a href='https://localhost:44352/api/Auth/confirm-email?userId=a47d3837-fac4-4419-b1f2-f70eed532205&token=Q2ZESjhJQmlKaVZkeHBwQXJGUloyaW9CbW5LaDRBTTdVcXJrYlpNRkxlUWIrOWRjU1ZhRmh1ZUV2UlYrR1FJdjVjM3BOdzg2b21kZnRkR0ozVW9lR1MrSUllZElzSTFjY0QyNjNVM2dtNktOSmJLMEgreWkvZU9JOEh2U0hGYldtWWsrY2FEVzRvdDh5NnNUcUE1T3RQOVozY3U3aThpclNJcHhNQ3lBa0Y0QW5ZQ2xhbHJ0TUV6NUJDWHFadmsxNk41Tno5ME16TnhLMGFiZXVQYzhDQndrTzJFQ1BNTk9RdlJSRDlYZW8yaDlpM1ZUL1ZLU1AzdHM1dnEwR3VVNWZhSmFuQT09'>here</a>.</p>
