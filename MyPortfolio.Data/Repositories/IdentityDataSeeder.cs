@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging; // <-- Bu sətir olduğundan əmin olun
+using Microsoft.Extensions.Logging; 
 using MyPortfolio.Core.Entities;
 using System.Threading.Tasks;
 
@@ -10,7 +10,6 @@ namespace MyPortfolio.Data
     {
         public static async Task SeedRolesAndSuperAdminAsync(IServiceProvider services, ILogger logger)
         {
-            // Lazımi servisləri əldə edirik
             var userManager = services.GetRequiredService<UserManager<AppUser>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -21,7 +20,6 @@ namespace MyPortfolio.Data
                 var roleExist = await roleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
                 {
-                    // Rol mövcud deyilsə, yarat
                     var result = await roleManager.CreateAsync(new IdentityRole(roleName));
                     if (result.Succeeded)
                     {
@@ -30,21 +28,20 @@ namespace MyPortfolio.Data
                 }
             }
 
-            // SuperAdmin istifadəçisini yarat
-            var superAdminEmail = "superadmin@example.com"; // <-- DƏYİŞİN
+            var superAdminEmail = "superadmin@gmail.com"; 
             var superAdminUser = await userManager.FindByEmailAsync(superAdminEmail);
 
             if (superAdminUser == null)
             {
                 var user = new AppUser
                 {
-                    UserName = "superadmin", // <-- DƏYİŞİN
+                    UserName = "superadmin", 
                     Email = superAdminEmail,
                     EmailConfirmed = true
                 };
 
 
-                string userPassword = "YourSuperStrongP@ssword1!"; // <-- DƏYİŞİN
+                string userPassword = "SuperAdmin123!"; 
 
                 var createResult = await userManager.CreateAsync(user, userPassword);
 
@@ -52,7 +49,6 @@ namespace MyPortfolio.Data
                 {
                     logger.LogInformation($"User '{user.UserName}' created successfully.");
 
-                    // İstifadəçiyə "SuperAdmin" rolunu ver
                     await userManager.AddToRoleAsync(user, "SuperAdmin");
                     logger.LogInformation($"User '{user.UserName}' added to 'SuperAdmin' role.");
                 }
