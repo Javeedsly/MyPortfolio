@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MyPortfolio.Core.DTOs;
 using MyPortfolio.Core.Entities;
 using MyPortfolio.Core.Interfaces;
+using MyPortfolio.Data.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,11 +17,12 @@ namespace MyPortfolio.Business.Services
         private readonly ILogger<FeedbackService> _logger;
         private readonly IEmailService _emailService;
 
-        public FeedbackService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<FeedbackService> logger)
+        public FeedbackService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<FeedbackService> logger, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
+            _emailService = emailService;
         }
 
         public async Task<FeedbackDto> CreateFeedbackAsync(CreateFeedbackDto createFeedbackDto)
