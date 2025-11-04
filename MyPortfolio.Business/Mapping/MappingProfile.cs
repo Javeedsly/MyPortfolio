@@ -26,6 +26,10 @@ namespace MyPortfolio.Business.Mapping
 
             CreateMap<UpdateBlogDto, Blog>()
                 .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+
+            CreateMap<Feedback, FeedbackDto>().ReverseMap();
+            CreateMap<CreateFeedbackDto, Feedback>()
+                .ForMember(dest => dest.SubmittedDate, opt => opt.Ignore());
         }
     }
 }

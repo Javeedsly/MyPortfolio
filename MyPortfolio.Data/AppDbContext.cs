@@ -10,6 +10,7 @@ namespace MyPortfolio.Data
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

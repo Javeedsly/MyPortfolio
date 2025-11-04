@@ -80,11 +80,15 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailService, FileEmailService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextApp",
