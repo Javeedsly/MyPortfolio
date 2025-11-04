@@ -33,7 +33,7 @@ namespace MyPortfolio.Controllers
 
         // GET: api/Feedbacks
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<FeedbackDto>>> GetFeedbacks()
         {
             var feedbacks = await _feedbackService.GetAllFeedbackAsync();
@@ -42,7 +42,7 @@ namespace MyPortfolio.Controllers
 
         // GET: api/Feedbacks/5
         [HttpGet("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<FeedbackDto>> GetFeedback(int id)
         {
             try
@@ -58,7 +58,7 @@ namespace MyPortfolio.Controllers
 
         // DELETE: api/Feedbacks/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        //[Authorize]
         public async Task<IActionResult> DeleteFeedback(int id)
         {
             try
