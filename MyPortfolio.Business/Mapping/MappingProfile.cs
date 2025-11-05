@@ -30,6 +30,21 @@ namespace MyPortfolio.Business.Mapping
             CreateMap<Feedback, FeedbackDto>().ReverseMap();
             CreateMap<CreateFeedbackDto, Feedback>()
                 .ForMember(dest => dest.SubmittedDate, opt => opt.Ignore());
+
+            // Category Maps
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<CreateCategoryDto, Category>();
+            CreateMap<UpdateCategoryDto, Category>();
+
+
+            CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+
+            CreateMap<CreateProductDto, Product>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
+
+            CreateMap<UpdateProductDto, Product>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
         }
     }
 }

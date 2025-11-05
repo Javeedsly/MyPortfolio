@@ -11,6 +11,8 @@ namespace MyPortfolio.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +28,15 @@ namespace MyPortfolio.Data
             {
                 entity.HasIndex(e => e.Slug).IsUnique();
                 entity.Property(e => e.PublishedDate).HasDefaultValueSql("GETUTCDATE()");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.Property(p => p.Price).HasColumnType("decimal(18,2)");
+
+                entity.HasOne(p => p.Category)
+                      .WithMany(c => c.Products)
+                      .HasForeignKey(p => p.CategoryId);
             });
         }
     }
