@@ -1,6 +1,6 @@
 # MyPortfolio - ASP.NET Core Web API
 
-This is the backend component for the "My Portfolio" application, built as an ASP.NET Core 8 Web API. It is designed to manage and serve portfolio project data, blog posts, handle user authentication, and manage file uploads.
+This is the backend component for the "My Portfolio" application, built as an ASP.NET Core 8 Web API. It is designed to manage and serve portfolio project data, blog posts, handle user authentication, manage file uploads, **and now includes features for handling user feedback and managing shop products and categories.**
 The project is built using a clean **N-Layer Architecture** and is intended to be consumed by a frontend application, such as a Next.js app (for which CORS is pre-configured).
 
 -----
@@ -11,10 +11,12 @@ The project is built using a clean **N-Layer Architecture** and is intended to b
   * **Authentication & Authorization:** Uses **ASP.NET Core Identity** for user management and **JWT Bearer tokens** for securing endpoints.
   * **Email Confirmation:** Includes an email confirmation flow for new user registrations.
   * **Email Service:** Features a swappable email service. By default, it uses `FileEmailService` which saves registration emails to the `MyPortfolio/emails` directory for easy development and testing.
+  * **Feedback Management:** API endpoints for submitting and managing user feedback.
+  * **Shop Management (Products & Categories):** Full CRUD operations for managing product categories and products.
   * **Repository & Unit of Work:** Implements the Generic Repository and Unit of Work patterns for robust and maintainable data access.
   * **Database Seeding:** Automatically seeds the database on application startup with user roles (`SuperAdmin`, `Admin`, `User`) and a default `superadmin` account.
   * **Database:** Uses **Entity Framework Core** with **SQL Server**.
-  * **File Uploads:** Handles image file uploads for projects and blogs, saving them to the server's `wwwroot/uploads` directory and storing a URL reference in the database.
+  * **File Uploads:** Handles image file uploads for projects, blogs, and products, saving them to the server's `wwwroot/uploads` directory and storing a URL reference in the database.
   * **DTO & Mapping:** Uses Data Transfer Objects (DTOs) and **AutoMapper** for clean data transfer between layers.
   * **API Documentation:** Integrated **Swagger/OpenAPI** for easy API testing and documentation.
   * **Containerization:** Includes a `Dockerfile` for easy containerization and deployment.
@@ -42,10 +44,10 @@ The solution follows an N-Layer architecture, separating responsibilities into t
 
 | Project | Role | Description |
 | :--- | :--- | :--- |
-| **`MyPortfolio.Core`** | Domain / Shared Kernel | Contains the core domain entities (`Project`, `Blog`, `AppUser`), DTOs, and all shared interfaces (`IRepository`, `IUnitOfWork`, `IProjectService`, `IBlogService`, `ITokenService`, `IEmailService`). |
-| **`MyPortfolio.Data`** | Data Access Layer (DAL) | Implements the interfaces from `Core`. Contains the `AppDbContext`, repository implementations (`Repository.cs`, `ProjectRepository.cs`, `BlogRepository.cs`, `UnitOfWork.cs`), database migrations, and the `IdentityDataSeeder`. |
-| **`MyPortfolio.Business`** | Business Logic Layer (BLL) | Contains the business logic and service implementations (`ProjectService.cs`, `BlogService.cs`, `TokenService.cs`, `FileEmailService.cs`) and AutoMapper profiles (`MappingProfile.cs`). |
-| **`MyPortfolio`** | Presentation Layer (API) | The main executable project. Contains the API Controllers (`ProjectsController.cs`, `BlogsController.cs`, `AuthController.cs`), `Program.cs` for service configuration, and `appsettings.json`. |
+| **`MyPortfolio.Core`** | Domain / Shared Kernel | Contains the core domain entities (`Project`, `Blog`, `AppUser`, `Feedback`, `Category`, `Product`), DTOs, and all shared interfaces (`IRepository`, `IUnitOfWork`, `IProjectService`, `IBlogService`, `ITokenService`, `IEmailService`, `IFeedbackService`, `ICategoryService`, `IProductService`). |
+| **`MyPortfolio.Data`** | Data Access Layer (DAL) | Implements the interfaces from `Core`. Contains the `AppDbContext`, repository implementations (`Repository.cs`, `ProjectRepository.cs`, `BlogRepository.cs`, `FeedbackRepository.cs`, `CategoryRepository.cs`, `ProductRepository.cs`, `UnitOfWork.cs`), database migrations, and the `IdentityDataSeeder`. |
+| **`MyPortfolio.Business`** | Business Logic Layer (BLL) | Contains the business logic and service implementations (`ProjectService.cs`, `BlogService.cs`, `TokenService.cs`, `FileEmailService.cs`, `FeedbackService.cs`, `CategoryService.cs`, `ProductService.cs`) and AutoMapper profiles (`MappingProfile.cs`). |
+| **`MyPortfolio`** | Presentation Layer (API) | The main executable project. Contains the API Controllers (`ProjectsController.cs`, `BlogsController.cs`, `AuthController.cs`, `FeedbacksController.cs`, `CategoriesController.cs`, `ProductsController.cs`), `Program.cs` for service configuration, and `appsettings.json`. |
 
 -----
 
@@ -122,7 +124,7 @@ dotnet ef database update
 2.  Once the application is running (e.g., at `http://localhost:5247`), open the Swagger UI (`/swagger`).
 3.  Log in with the default superadmin account created by `IdentityDataSeeder`:
       * **Username:** `superadmin`
-      * **Password:** `YourSuperStrongP@ssword1!`
+      * **Password:** `SuperAdmin123!`
 4.  Use the `POST /api/Auth/login` endpoint to log in.
 5.  Copy the resulting JWT token from the response and paste it into the "Authorize" button in Swagger to access protected endpoints.
 
@@ -160,3 +162,32 @@ Full CRUD operations for blog posts.
   * `POST /api/Blogs` - Creates a new post, including an image, via `[FromForm]`.
   * `PUT /api/Blogs/{id}` - Updates an existing post via `[FromForm]`.
   * `DELETE /api/Blogs/{id}`
+
+### `Feedbacks` Controller
+
+Manages submission and retrieval of user feedback.
+
+  * `POST /api/Feedbacks` - Submits new feedback.
+  * `GET /api/Feedbacks` - Retrieves all feedback.
+  * `GET /api/Feedbacks/{id}` - Retrieves specific feedback by ID.
+  * `DELETE /api/Feedbacks/{id}` - Deletes feedback.
+
+### `Categories` Controller
+
+CRUD operations for product categories.
+
+  * `GET /api/Categories`
+  * `GET /api/Categories/{id}`
+  * `POST /api/Categories`
+  * `PUT /api/Categories/{id}`
+  * `DELETE /api/Categories/{id}`
+
+### `Products` Controller
+
+CRUD operations for products.
+
+  * `GET /api/Products`
+  * `GET /api/Products/{id}`
+  * `POST /api/Products` - Creates a new product, including an image, via `[FromForm]`.
+  * `PUT /api/Products/{id}` - Updates an existing product via `[FromForm]`.
+  * `DELETE /api/Products/{id}`
